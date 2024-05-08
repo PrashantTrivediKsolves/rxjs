@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable,Subject } from 'rxjs';
+import { AsyncSubject, BehaviorSubject, Observable,ReplaySubject,Subject } from 'rxjs';
 import {ajax} from 'rxjs/ajax';
 import { domainToASCII } from 'url';
 
@@ -11,7 +11,7 @@ import { domainToASCII } from 'url';
 export class RxjsComponent implements OnInit {
 
   constructor() { }
-
+  
   ngOnInit(): void {
 
     // Obserables are unicast
@@ -60,29 +60,79 @@ export class RxjsComponent implements OnInit {
 
 // subject
 
-    const subject=new Subject();
+    // const subject=new Subject();
 
-    subject.subscribe(d=>console.log(d));
-    subject.subscribe(d=>console.log(d));
-    subject.subscribe(d=>console.log(`Subject Subscriber1 : ${d}`));
-    subject.next(2020);
+    // subject.subscribe(d=>console.log(d));
+    // subject.subscribe(d=>console.log(d));
+    // subject.subscribe(d=>console.log(`Subject Subscriber1 : ${d}`));
+    // subject.next(2020);
 
-    subject.subscribe(d=>console.log(`Subject Subscriber2 : ${d}`));
-    // nothing...
+    // subject.subscribe(d=>console.log(`Subject Subscriber2 : ${d}`));
+    // // nothing...
 
-    // subject.next(22);
-    // const result=data.subscribe(subject);
+    // // subject.next(22);
+    // // const result=data.subscribe(subject);
 
 
-    // behavior subject examples...
+    // // behavior subject examples...
 
-    const bSuject=new BehaviorSubject<number>(12);
+    // const bSuject=new BehaviorSubject<number>(12);
 
-    bSuject.subscribe(d=>console.log(`BehaviorSubject Subscriber 1 ${d}`));
+    // bSuject.subscribe(d=>console.log(`BehaviorSubject Subscriber 1 ${d}`));
 
-    bSuject.next(200);
+    // bSuject.next(200);
 
-    bSuject.subscribe(d=>console.log(`BehaviorSubject Subscriber 1 ${d}`));
+    // bSuject.subscribe(d=>console.log(`BehaviorSubject Subscriber 1 ${d}`));
+
+    //  ReplaySubject..........
+
+    // const $message=new ReplaySubject(2);// it will hold only two value in the buffer...
+
+    // $message.next("Hello..");
+    // $message.next("How are you  ?");
+
+    // $message.next("From whare are you");
+    // $message.next("Stay at Home ?");
+
+    // $message.subscribe(msg=>console.log(`User1: ${msg}`));
+
+    // $message.next("Get Vaccinated...");
+    // $message.next("Keep Learning...");
+
+    // $message.subscribe(msg=>console.log(`User2: ${msg}`));
+
+    // async subject
+
+    // const asyncSubject$=new AsyncSubject();
+
+    // asyncSubject$.next("Value1");
+    // asyncSubject$.next("Value2");
+    // asyncSubject$.next("Value3");
+
+    // asyncSubject$.subscribe(d=>console.log(`User1 ${d}`));
+    // asyncSubject$.complete();
+    // asyncSubject$.next("Value4");
+    // asyncSubject$.next("Value5");
+
+    // asyncSubject$.subscribe(d=>console.log(`User1 ${d}`));
+
+    const url="https://restcountries.com/v3.1/name/india?fullText=true";
+    const cache:{ [url: string]: Observable<any> } = {};
+    function getCountryInfo(url:string)
+    {
+      if(!cache[url])
+        {
+          // api call using fetch..
+
+          cache[url]=new AsyncSubject();
+          fetch(url).then(res=>res.json()).
+          then(d=>
+            {
+
+            }
+          )
+        }
+    }
 
   }
 

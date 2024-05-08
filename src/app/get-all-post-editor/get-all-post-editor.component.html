@@ -1,0 +1,12 @@
+<p>get-all-post-editor works!</p>
+
+<button (click)="getpost()">get All</button>
+
+<div>
+  <ul *ngFor="let post of Posts">
+    <div style="background-color: blueviolet;">
+      <li>{{post.name}}</li>
+      <div [innerHTML]="post.editorContent"></div>
+    </div>
+  </ul>
+</div>

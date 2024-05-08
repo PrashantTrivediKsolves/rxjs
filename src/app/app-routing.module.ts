@@ -5,6 +5,7 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { ProductDashBoardComponent } from './product-dash-board/product-dash-board.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { GetAllPostEditorComponent } from './get-all-post-editor/get-all-post-editor.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,11 @@ const routes: Routes = [
   {
     path:"rxjs",
     component:RxjsComponent
+  }
+  ,
+  {
+    path:"getAll",
+    component:GetAllPostEditorComponent
   }
 ];
 
